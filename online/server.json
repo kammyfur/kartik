@@ -1,0 +1,10 @@
+{
+    "ktpv1": {
+        "hostname": "localhost",
+        "port": 8408
+    },
+    "ktpv2": {
+      "hostname": "localhost",
+        "port": 8409
+    }
+}

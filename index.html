@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#000000;margin:0;height:100%;width:100%;">
+<head>
+    <script>
+        require('electron').ipcRenderer.on('ready', (e, a) => {
+            location.hash = "#ready";
+            location.reload();
+        })
+
+        require('electron').ipcRenderer.on('progress', (e, a) => {
+            document.getElementById("bar-inner").style.width = a + "%";
+
+            if (a >= 100) {
+                document.getElementById("bar-outer-outer").style.opacity = "0";
+            }
+        })
+    </script>
+    <style>
+        * {
+            cursor: default !important;
+        }
+    </style>
+    <script>if (typeof require !== "undefined") {native = true;try{global.native = true;}catch(e){}} else {native = false;try{global.native = false;}catch(e){}}if (!native){global = window;}if (native){kresources=require('@electron/remote').getCurrentWindow().resources;trackEvent=require('@electron/remote').getCurrentWindow().trackEvent;}info=(_a,b)=>{console.info(b);};warn=(_a,b)=>{console.warn(b);};error=(_a,b)=>{console.error(b);};</script>
+    <meta charset="UTF-8">
+    <title>KartikX</title>
+    <script src="./crash/client.js"></script>
+    <script src="./lang/loader.js"></script>
+    <link rel="stylesheet" href="./views/common/fonts.css">
+    <link rel="stylesheet" href="./views/common/index.css">
+    <script src="./views/script/core_head.js"></script>
+    <script src="./views/script/core_compatlayer.js"></script>
+    <script src="./views/script/core_fullscreen.js"></script>
+    <script src="./typescript/mainloader.js"></script>
+</head>
+<body style="background:#000000;margin:0;height:100%;width:100%;zoom:1.2;">
+    <div id="dummyloader" style="display:flex;align-items:center;justify-content:center;position:fixed;z-index:1;inset: 0;height: 100%;background:#064896;overflow:hidden;">
+    </div>
+    <div style="height: 64px;position: fixed;bottom: 10px;left: 0;background-image: url(./logo/newloader.svg);width: 100000000px;background-size: contain;animation-name: loading;animation-direction: reverse;animation-fill-mode: forwards;animation-timing-function: linear;animation-duration: 5000s;animation-iteration-count: infinite;opacity: .5;"></div>
+    <style>
+        @keyframes loading {
+            0% {
+                left: 0;
+            }
+            100% {
+                left: -900000px;
+            }
+        }
+        @keyframes logo {
+            0% {
+                transform: rotate3d(1, 1, 1, 0deg);
+            }
+            100% {
+                transform: rotate3d(1, 1, 1, 360deg);
+            }
+        }
+    </style>
+    <div id="notification" style="position: fixed; z-index: 9999; background: rgba(0, 0, 0, 0.5); color: white; padding: 10px; width: 256px; right: -300px; top: 20px; opacity: 0; border-radius: 10px; backdrop-filter: blur(10px); transition: right 400ms linear 0s, opacity 400ms linear 0s;">
+        <span id="notification-title" style="
+    font-weight: bold;
+    text-align: left;
+    display: block;
+    padding-bottom: 5px;
+">hello</span>
+        <span id="notification-message" style="
+    display: block;
+    max-width: 256px;
+    text-align: left;
+">goodbye</span>
+    </div>
+    <script>if (!native) { document.getElementById('titlebar').style.display = "none"; }</script>
+    <webview id="wb" src="views/loader.html" style="border: 0;z-index:2;top:0;left:0;right:0;bottom:0;position:fixed;opacity:0;transition:opacity 500ms;" nodeintegration disablewebsecurity allowpopups webpreferences="nodeIntegration,contextIsolation=no"></webview>
+    <script>
+        setTimeout(() => {
+            document.getElementById("wb").style.opacity = "1";
+            if (location.hash !== "#ready") {
+                document.getElementById("bar-outer-outer").style.opacity = "1";
+            }
+        }, 1500)
+    </script>
+    <script src="./views/script/core_chart.js"></script>
+    <script src="./views/script/core_music.js"></script>
+    <script src="./views/script/core_viewer.js"></script>
+    <script src="./views/script/core_stats.js"></script>
+    <script src="./views/script/core_notification.js"></script>
+
+    <div id="error-outer" style="display:none;background:rgba(0, 0, 0, .5);backdrop-filter: blur(10px);position:fixed;inset:0;align-items:center;justify-content: center;z-index:999;text-align: center;">
+        <div id="error" style="background:#111;border-radius:10px;color:white;max-width:40vw;">
+            <div id="error-title" style="padding:10px;background:#222;border-top-left-radius: 10px;border-top-right-radius: 10px;">KartikX encountered an error</div>
+            <div id="error-details" style="padding:10px;">An error occurred and KartikX couldn't continue running. We collected some info that you can send to the developers so they can fix the problem.<textarea id="crash-dump" disabled="" style="margin: 0;resize: none;background: #171717;color: white;margin-top: 10px;font-family: monospace;font-size: 10px;width: calc(100% - 13px);padding: 5px;border: 2px ridge white;border-radius: 0;height: 180px;overflow-y: scroll;">Nothing there yet!</textarea><div id="error-buttons" style="margin-top: 10px;"><button style="padding: 5px 10px;margin-right: 5px;border-radius: 5px;background: #161616;color: white;border: 1px solid #121212;cursor: pointer !important;outline:none;" class="error-button" onclick="require('open')('https://jetbrains.minteck.ro.lt:1024/youtrack/newIssue?project=KTK&summary=%5BTry%20to%20summarize%20what%20the%20bug%20says%5D&description=%23%20Kartik%20Bug%20Report%0A%0A%23%23%20Crash%20Report%0A%0A%60%60%60text%0A%25replace%25%0A%60%60%60%0A%0A%23%23%20Steps%20to%20reproduce%0A%0A%5BTell%20us%20how%20you%20triggered%20the%20crash%2C%20how%20to%20reproduce%20it%20if%20possible%5D%0A%0A%23%23%20Other%20notes%0A%0A%5BIf%20you%20modified%20your%20version%20of%20Kartik%2C%20tell%20us%20what%20you%20modified.%20All%20the%20rest%20of%20the%20information%20should%20be%20in%20the%20Crash%20Report.%5D'.replace('%25replace%25', encodeURI(document.getElementById('crash-dump').value.split('---------------------------------------------------------------------------------------')[0].trim())));">Open report page</button> <button class="error-button" style="padding: 5px 10px;border-radius: 5px;background: #161616;color: white;border: 1px solid #121212;cursor: pointer !important;outline:none;" onclick="location.reload();">Restart</button></div></div>
+        </div>
+
+        <style>
+            .error-button:hover {
+                background: #212121 !important;
+            }
+
+            .error-button:active, .error-button:focus {
+                background: #252525 !important;
+            }
+        </style>
+    </div>
+
+    <div id="bar-outer-outer" style="pointer-events:none;z-index:99;position:fixed;inset:0;display:flex;justify-content: center;align-items: center;margin-top:120px;opacity:0;transition:opacity 500ms;">
+        <div id="bar-outer" style="pointer-events:none;background:rgba(255, 255, 255, .25);width:256px;height:5px;border-radius:999px;">
+            <div id="bar-inner" style="pointer-events:none;background:rgba(255, 255, 255, .5);width:0;height:5px;border-radius:999px;"></div>
+        </div>
+    </div>
+
+    <script src="./views/script/core_crash.js"></script>
+    <script>
+
+    try { if (process === undefined) {
+        document.body.innerHTML = "<p style='color:white;'>This webpage is meant to be used by Kartik's engine, it doesn't work on a Web browser.</p>"
+    } } catch (e) {
+        document.body.innerHTML = "<p style='color:white;'>This webpage is meant to be used by Kartik's engine, it doesn't work on a Web browser.</p>"
+    }
+
+    </script>
+</body>
+</html>

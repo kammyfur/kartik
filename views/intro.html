@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#000000;margin:0;height:100%;width:100%;">
+<head>
+    <script>if (typeof require !== "undefined") {native = true;try{global.native = true;}catch(e){}} else {native = false;try{global.native = false;}catch(e){}}if (!native){global = window;}if (native){kresources=require('@electron/remote').getCurrentWindow().resources;trackEvent=require('@electron/remote').getCurrentWindow().trackEvent;}info=(_a,b)=>{console.info(b);};warn=(_a,b)=>{console.warn(b);};error=(_a,b)=>{console.error(b);};const Nest = require("../nest/abi");currentNest = require('@electron/remote').getCurrentWindow().nest;</script>
+    <script src="../lang/loader.js"></script>
+    <meta charset="UTF-8">
+    <title>KartikX</title>
+    <link rel="stylesheet" href="common/fonts.css">
+    <link rel="stylesheet" href="common/blur.css">
+    <link rel="stylesheet" href="intro.css">
+    <script src="../crash/client.js"></script>
+    <script src="./script/global_compatlayer.js"></script><script src="../typescript/mainloader.js"></script>
+    <script>
+        require('@electron/remote').getCurrentWindow().dstate = lang.discord.intro[0];
+        require('@electron/remote').getCurrentWindow().ddetails = lang.discord.intro[1];
+    </script>
+    <script>
+        if (!require('@electron/remote').getCurrentWindow().debug) {
+            document.write('<link rel="stylesheet" href="common/mouse.css">');
+        }
+    </script>
+</head>
+<body style="background:#000000;margin:0;height:100%;width:100%;">
+    <script>info("MainWindow", "Rendering initial frame...");
+    
+    if (native) {
+        scale=require('@electron/remote').getCurrentWindow().scale;document.body.style.zoom=scale;
+    }
+    
+    </script>
+    <script src="./script/intro_media.js"></script>
+    <div id="box" style="display:none;position:fixed;inset:0;">
+    </div>
+
+    <script src="./script/intro_global.js"></script>
+    <script>info("LoadWindow", "Launching start-up procedure");</script>
+
+    <script src="./script/client_fullscreen.js"></script>
+    <script>
+        location.href = "menu.html";
+    </script>
+</body>
+</html>
